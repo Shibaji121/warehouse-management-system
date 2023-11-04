@@ -1,11 +1,12 @@
 import React from "react";
 import Header from "./Header/Header";
+import HomePage from "./HomePage/HomePage";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <h1>Shibaji Sahu</h1>
+      <HomePage />
     </div>
   );
 }

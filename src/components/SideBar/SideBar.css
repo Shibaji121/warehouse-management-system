@@ -1,0 +1,22 @@
+.side-bar-container {
+  min-width: 22rem;
+  background-color: #e4e4e4;
+  padding: 1rem;
+  min-height: 97vh;
+  padding-bottom: 0;
+  position: fixed;
+}
+.side-bar {
+  padding: 4rem 0;
+  margin: 1rem;
+}
+.side-bar select {
+  border-radius: 10px;
+  width: 18rem;
+  height: 2rem;
+  text-align: center;
+  font-size: 1rem;
+}
+.side-bar > div {
+  margin-top: 3rem;
+}
