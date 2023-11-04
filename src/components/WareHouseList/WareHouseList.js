@@ -6,7 +6,7 @@ const WareHouseList = () => {
     <div className="ware-house-list">
       <h1>Ware house Availability</h1>
       <div className="ware-house">
-        {[...new Array(1)].map(() => {
+        {[...new Array(9)].map(() => {
           return <HouseCard />;
         })}
       </div>
