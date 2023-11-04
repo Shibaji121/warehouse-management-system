@@ -4,11 +4,11 @@
   padding: 1rem;
   min-height: 97vh;
   padding-bottom: 0;
-  position: fixed;
 }
 .side-bar {
   padding: 4rem 0;
   margin: 1rem;
+  position: fixed;
 }
 .side-bar select {
   border-radius: 10px;
