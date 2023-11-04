@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+##Access DB by this url
+https://my-json-server.typicode.com/Shibaji121/warehouse-management-system/wareHouses
+
 ## Available Scripts
 
 In the project directory, you can run:
