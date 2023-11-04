@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e4e4e4;
+  padding: 0 10px;
+  height: 4rem;
+  box-shadow: 0px 4px 9px 0px lightslategrey;
+}
+.header-left,
+.header-right,
+.header-middle {
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  width: 4rem;
+}
+.header-right img {
+  cursor: pointer;
+  height: 3rem;
+  width: 3rem;
+}
+.header-left,
+.header-right {
+  gap: 1rem;
+}
+.header-middle input {
+  font-size: 1rem;
+  border-radius: 20px 0 0px 20px;
+  padding-left: 1rem;
+  height: 2rem;
+  width: 30vw;
+}
+.header-middle input:focus {
+  outline: none;
+}
+.header-middle button {
+  height: 2.3rem;
+  border-radius: 0 20px 20px 0;
+  border-left: none;
+  padding: 0 15px;
+  cursor: pointer;
+}
