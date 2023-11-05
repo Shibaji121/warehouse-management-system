@@ -26,7 +26,6 @@
   align-items: center;
   justify-content: space-between;
   font-weight: 700;
-  margin-top: 3rem;
 }
 .right-container {
   padding: 1rem;
@@ -42,7 +41,7 @@
   font-weight: 500;
   font-style: oblique;
 }
-.right-container button {
+.right-container > button {
   border: none;
   background: none;
   cursor: pointer;
@@ -55,4 +54,27 @@
   bottom: 0rem;
   justify-content: space-between;
   width: 90%;
+}
+.right-container input,
+.right-container select {
+  width: inherit;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  height: 1.5rem;
+  padding: 0 15px;
+}
+.btns {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0rem;
+  width: 95%;
+}
+.btns > button {
+  width: 100%;
+  border-radius: 30px;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: white;
 }
