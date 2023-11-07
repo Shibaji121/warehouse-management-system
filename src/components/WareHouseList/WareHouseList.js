@@ -1,39 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../WareHouseList/WareHouseList.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getWareHouses } from "../../redux/actions/action";
 
 const WareHouseList = () => {
+  const dispatch = useDispatch();
+  const wareHouses = useSelector((state) => state.wareHouse.wareHouses);
+
+  useEffect(() => {
+    dispatch(getWareHouses());
+  }, [dispatch]);
   return (
     <div className="ware-house-list">
       <h1>Ware house Availability</h1>
       <div className="ware-house">
-        {[...new Array(9)].map(() => {
-          return <HouseCard />;
+        {wareHouses.map((house) => {
+          return <HouseCard key={house.id} house={house} />;
         })}
       </div>
     </div>
   );
 };
 
-const HouseCard = () => {
+const HouseCard = ({ house }) => {
   return (
-    <div class="nft">
-      <div class="main">
+    <div className="nft">
+      <div className="main">
         <img
-          class="tokenImage"
+          className="tokenImage"
           src="https://static.vecteezy.com/system/resources/previews/001/226/694/non_2x/aisle-of-warehouse-free-photo.jpg"
           alt="wh-img"
         />
-        <h2>Warehouse-165</h2>
-        <p class="description">Type: Leasable Space</p>
-        <p class="description">Cluster: cluster-a-32</p>
-        <p class="description">Space Available: 1234</p>
-        <div class="tokenInfo">
-          <div class="price">
-            <p>City: Delhi</p>
+        <h2>{house?.name}</h2>
+        <p className="description">Type: {house?.type}</p>
+        <p className="description">Cluster: {house?.cluster}</p>
+        <p className="description">Space Available: {house?.space_available}</p>
+        <div className="tokenInfo">
+          <div className="price">
+            <p>City: {house?.city}</p>
           </div>
-          <div class="duration">
-            <div>🟢</div>
-            <p>Live</p>
+          <div className="duration">
+            {house?.is_live ? <div>🟢</div> : <div>🔴</div>}
+            {house?.is_live ? <p>Live</p> : <p>Off Line</p>}
           </div>
         </div>
       </div>
