@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "../WareHouseList/WareHouseList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getWareHouses } from "../../redux/actions/action";
+import { useNavigate } from "react-router-dom";
 
 const WareHouseList = () => {
   const dispatch = useDispatch();
@@ -23,8 +24,12 @@ const WareHouseList = () => {
 };
 
 const HouseCard = ({ house }) => {
+  const navigate = useNavigate();
+  const handleCardClick = (id) => {
+    navigate(`/search/${id}`);
+  };
   return (
-    <div className="nft">
+    <div className="nft" onClick={() => handleCardClick(house.id)}>
       <div className="main">
         <img
           className="tokenImage"

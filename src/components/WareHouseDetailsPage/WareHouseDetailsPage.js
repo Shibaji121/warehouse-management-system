@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../WareHouseDetailsPage/WareHouseDetailsPage.css";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const WareHouseDetailsPage = () => {
   const [editMode, setEditMode] = useState(false);
+  const [house, setHouse] = useState();
+  const params = useParams();
+  const wareHouses = useSelector((state) => state.wareHouse.wareHouses);
+
+  useEffect(() => {
+    const filteredHouse = wareHouses.find(
+      (house) => house.id === parseInt(params.id)
+    );
+    if (filteredHouse) {
+      setHouse(filteredHouse);
+    }
+  }, [wareHouses, params]);
 
   return (
     <div className="details-page">
@@ -66,18 +80,24 @@ const WareHouseDetailsPage = () => {
               />
             </button>
             <div className="name" style={{ marginTop: "3rem" }}>
-              <div style={{ fontSize: "x-large" }}>Name: Warehouse-165</div>
-              <div style={{ color: "#575268" }}>Code: W-00001</div>
+              <div style={{ fontSize: "x-large" }}>Name: {house?.name}</div>
+              <div style={{ color: "#575268" }}>Code: {house?.code}</div>
             </div>
-            <div className="detail-data">Type: Leasable Space</div>
-            <div className="detail-data">Cluster: cluster-a-32</div>
-            <div className="detail-data">Space Available: 1234</div>
-            <div className="detail-data">City: Delhi</div>
+            <div className="detail-data">Type: {house?.type}</div>
+            <div className="detail-data">Cluster: {house?.cluster}</div>
+            <div className="detail-data">
+              Space Available: {house?.space_available}
+            </div>
+            <div className="detail-data">City: {house?.city}</div>
             <div className="live">
               <div className="detail-data" style={{ color: "#783373" }}>
-                Registered
+                {house?.is_registered}
               </div>
-              <div className="detail-data">🟢 Live</div>
+              {house?.is_live ? (
+                <div className="detail-data">🟢 Live</div>
+              ) : (
+                <div className="detail-data">🔴 OffLine</div>
+              )}
             </div>
           </div>
         )}
