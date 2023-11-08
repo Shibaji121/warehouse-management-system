@@ -3,10 +3,12 @@ import {
   FILTER_BY_CLUSTER,
   FILTER_BY_RANGE,
   GET_WAREHOUSE,
+  SEARCH_WAREHOUSE,
 } from "../actions/action";
 
 const initialState = {
   wareHouses: [],
+  searchedId: 0,
 };
 
 export const wareHouseReducer = (prevState = initialState, action) => {
@@ -39,6 +41,14 @@ export const wareHouseReducer = (prevState = initialState, action) => {
       return {
         ...prevState,
         wareHouses: arr,
+      };
+    case SEARCH_WAREHOUSE:
+      const houses = prevState.wareHouses.filter((house) =>
+        house.name.includes(action.payload)
+      );
+      return {
+        ...prevState,
+        wareHouses: houses,
       };
     default:
       return prevState;

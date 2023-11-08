@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "../Header/Header.css";
+import { useDispatch } from "react-redux";
+import { searchWarehouse } from "../../redux/actions/action";
 
 const Header = () => {
+  const [keyword, setKeyword] = useState("");
+  const dispatch = useDispatch();
+  const handleSearch = () => {
+    if (keyword) {
+      console.log(keyword);
+      dispatch(searchWarehouse(keyword));
+    }
+  };
   return (
     <div className="header">
       <a href="/" className="header-left">
@@ -14,8 +24,14 @@ const Header = () => {
         <h4>All Ware Houses</h4>
       </a>
       <div className="header-middle">
-        <input type="text" placeholder="Search any ware house" />
-        <button type="submit">🔍</button>
+        <input
+          type="text"
+          placeholder="Search any ware house"
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+        <button type="submit" onClick={handleSearch}>
+          🔍
+        </button>
       </div>
       <div className="header-right">
         <img

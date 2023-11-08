@@ -2,6 +2,7 @@ export const GET_WAREHOUSE = "GET_WAREHOUSE";
 export const FILTER_BY_CITY = "FILTER_BY_CITY";
 export const FILTER_BY_CLUSTER = "FILTER_BY_CLUSTER";
 export const FILTER_BY_RANGE = "FILTER_BY_RANGE";
+export const SEARCH_WAREHOUSE = "SEARCH_WAREHOUSE";
 
 export const filterByCity = (city) => {
   return {
@@ -19,6 +20,12 @@ export const filterByRange = (range) => {
   return {
     type: FILTER_BY_RANGE,
     payload: range,
+  };
+};
+export const searchWarehouse = (keyword) => {
+  return {
+    type: SEARCH_WAREHOUSE,
+    payload: keyword,
   };
 };
 
