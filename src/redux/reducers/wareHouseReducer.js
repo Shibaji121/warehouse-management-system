@@ -65,17 +65,19 @@ export const wareHouseReducer = (prevState = initialState, action) => {
         wareHouses: houses,
       };
     case UPDATE_WAREHOUSE:
-      const updatedHouse = prevState.wareHouses.map((house) => {
-        if (house.id === action.payload.house.id) {
-          house.name = action.payload.updatedHouse.name;
-          house.city = action.payload.updatedHouse.city;
-          house.space_available = action.payload.updatedHouse.space_available;
-          house.type = action.payload.updatedHouse.type;
-          house.cluster = action.payload.updatedHouse.cluster;
-          house.is_live = action.payload.updatedHouse.is_live;
+      const updatedHouse = JSON.parse(localStorage.getItem("wareHouses")).map(
+        (house) => {
+          if (house.id === action.payload.house.id) {
+            house.name = action.payload.updatedHouse.name;
+            house.city = action.payload.updatedHouse.city;
+            house.space_available = action.payload.updatedHouse.space_available;
+            house.type = action.payload.updatedHouse.type;
+            house.cluster = action.payload.updatedHouse.cluster;
+            house.is_live = action.payload.updatedHouse.is_live;
+          }
+          return house;
         }
-        return house;
-      });
+      );
       localStorage.setItem("wareHouses", JSON.stringify(updatedHouse));
       return {
         ...prevState,
