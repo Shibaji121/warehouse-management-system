@@ -8,17 +8,30 @@ import {
 } from "../actions/action";
 
 const initialState = {
-  wareHouses: [],
+  wareHouses: localStorage.getItem("wareHouses")
+    ? JSON.parse(localStorage.getItem("wareHouses"))
+    : [],
   searchedId: 0,
 };
 
 export const wareHouseReducer = (prevState = initialState, action) => {
   switch (action.type) {
     case GET_WAREHOUSE:
-      return {
-        ...prevState,
-        wareHouses: action.payload.wareHouses,
-      };
+      if (prevState.wareHouses.length === 0) {
+        localStorage.setItem(
+          "wareHouses",
+          JSON.stringify(action.payload.wareHouses)
+        );
+        return {
+          ...prevState,
+          wareHouses: action.payload.wareHouses,
+        };
+      } else {
+        return {
+          ...prevState,
+        };
+      }
+
     case FILTER_BY_CITY:
       const newArr = prevState.wareHouses.filter(
         (house) => house.city === action.payload
@@ -63,6 +76,7 @@ export const wareHouseReducer = (prevState = initialState, action) => {
         }
         return house;
       });
+      localStorage.setItem("wareHouses", JSON.stringify(updatedHouse));
       return {
         ...prevState,
         wareHouses: updatedHouse,
