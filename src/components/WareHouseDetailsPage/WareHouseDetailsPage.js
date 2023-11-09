@@ -6,6 +6,12 @@ import { useSelector } from "react-redux";
 const WareHouseDetailsPage = () => {
   const [editMode, setEditMode] = useState(false);
   const [house, setHouse] = useState();
+  const [name, setName] = useState();
+  const [type, setType] = useState();
+  const [cluster, setCluster] = useState();
+  const [space, setSpace] = useState();
+  const [city, setCity] = useState();
+  const [live, setLive] = useState();
   const params = useParams();
   const wareHouses = useSelector((state) => state.wareHouse.wareHouses);
 
@@ -14,7 +20,14 @@ const WareHouseDetailsPage = () => {
       (house) => house.id === parseInt(params.id)
     );
     if (filteredHouse) {
+      console.log(filteredHouse.is_live);
       setHouse(filteredHouse);
+      setName(filteredHouse.name);
+      setType(filteredHouse.type);
+      setCluster(filteredHouse.cluster);
+      setSpace(filteredHouse.space_available);
+      setCity(filteredHouse.city);
+      setLive(filteredHouse.is_live);
     }
   }, [wareHouses, params]);
 
@@ -33,25 +46,55 @@ const WareHouseDetailsPage = () => {
             <div className="name">
               <div style={{ fontSize: "x-large" }}>
                 Name:
-                <input type="text" />
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
-              <div style={{ color: "#575268" }}>Code: W-00001</div>
+              <div style={{ color: "#575268" }}>Code: {house?.code}</div>
             </div>
             <div className="detail-data">
-              Type: <input type="text" />
+              Type:{" "}
+              <input
+                type="text"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              />
             </div>
             <div className="detail-data">
-              Cluster: <input type="text" />
+              Cluster:{" "}
+              <input
+                type="text"
+                value={cluster}
+                onChange={(e) => setCluster(e.target.value)}
+              />
             </div>
             <div className="detail-data">
-              Space Available: <input type="number" />
+              Space Available:{" "}
+              <input
+                type="number"
+                value={space}
+                onChange={(e) => setSpace(e.target.value)}
+              />
             </div>
             <div className="detail-data">
-              City: <input type="text" />
+              City:{" "}
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
             </div>
             <div className="detail-data">
               Select Live Status:{" "}
-              <select>
+              <select
+                value={live ? "Live" : "OffLine"}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setLive(e.target.value === "Live");
+                }}
+              >
                 <option>Live</option>
                 <option>OffLine</option>
               </select>
@@ -80,20 +123,18 @@ const WareHouseDetailsPage = () => {
               />
             </button>
             <div className="name" style={{ marginTop: "3rem" }}>
-              <div style={{ fontSize: "x-large" }}>Name: {house?.name}</div>
+              <div style={{ fontSize: "x-large" }}>Name: {name}</div>
               <div style={{ color: "#575268" }}>Code: {house?.code}</div>
             </div>
-            <div className="detail-data">Type: {house?.type}</div>
-            <div className="detail-data">Cluster: {house?.cluster}</div>
-            <div className="detail-data">
-              Space Available: {house?.space_available}
-            </div>
-            <div className="detail-data">City: {house?.city}</div>
+            <div className="detail-data">Type: {type}</div>
+            <div className="detail-data">Cluster: {cluster}</div>
+            <div className="detail-data">Space Available: {space}</div>
+            <div className="detail-data">City: {city}</div>
             <div className="live">
               <div className="detail-data" style={{ color: "#783373" }}>
                 {house?.is_registered}
               </div>
-              {house?.is_live ? (
+              {live ? (
                 <div className="detail-data">🟢 Live</div>
               ) : (
                 <div className="detail-data">🔴 OffLine</div>
