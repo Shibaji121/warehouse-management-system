@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../WareHouseDetailsPage/WareHouseDetailsPage.css";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateWareHouse } from "../../redux/actions/action";
 
 const WareHouseDetailsPage = () => {
   const [editMode, setEditMode] = useState(false);
@@ -14,13 +15,26 @@ const WareHouseDetailsPage = () => {
   const [live, setLive] = useState();
   const params = useParams();
   const wareHouses = useSelector((state) => state.wareHouse.wareHouses);
+  const dispatch = useDispatch();
+
+  const updateHouseDetail = () => {
+    let updatedDetail = {
+      name: name,
+      city: city,
+      space_available: space,
+      type: type,
+      cluster: cluster,
+      is_live: live,
+    };
+    dispatch(updateWareHouse(house, updatedDetail));
+    setEditMode(false);
+  };
 
   useEffect(() => {
     const filteredHouse = wareHouses.find(
       (house) => house.id === parseInt(params.id)
     );
     if (filteredHouse) {
-      console.log(filteredHouse.is_live);
       setHouse(filteredHouse);
       setName(filteredHouse.name);
       setType(filteredHouse.type);
@@ -100,7 +114,12 @@ const WareHouseDetailsPage = () => {
               </select>
             </div>
             <div className="btns">
-              <button style={{ background: "black" }}>SAVE</button>
+              <button
+                style={{ background: "black" }}
+                onClick={updateHouseDetail}
+              >
+                SAVE
+              </button>
               <button
                 style={{ background: "#e6e4ec", color: "black" }}
                 onClick={() => setEditMode(false)}
