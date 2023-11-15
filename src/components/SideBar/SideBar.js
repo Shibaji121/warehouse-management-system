@@ -25,6 +25,7 @@ const SideBar = () => {
     setCity(e.target.value);
     console.log(e.target.value);
     if (e.target.value === "All") {
+      localStorage.removeItem("wareHouses");
       dispatch(getWareHouses());
     } else {
       dispatch(filterByCity(e.target.value));
