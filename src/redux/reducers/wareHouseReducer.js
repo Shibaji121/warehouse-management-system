@@ -17,7 +17,6 @@ const initialState = {
 export const wareHouseReducer = (prevState = initialState, action) => {
   switch (action.type) {
     case GET_WAREHOUSE:
-      console.log(prevState.wareHouses);
       if (prevState.wareHouses.length === 0) {
         localStorage.setItem(
           "wareHouses",
